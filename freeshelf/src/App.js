@@ -1,22 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-import {bookInfo} from './bookinfo';
+import { bookInfo } from './bookinfo';
 
+console.log(bookInfo.length)
 
-function App({ title, author, description, cover }) {
-  for(let book of bookInfo){
-    <p>bookInfo.author</p>
-  }
-  return (<div>
+function App() {
+  const bookList = bookInfo.map((book) => {
+    return (
+      <div>
+        <h2>Title: {book.title}</h2>
+        <h4>Author: {book.author}</h4>
+        <p>Description: {book.shortDescription}</p>
+        <img src={book.coverImageUrl}></img>
+      </div>
+    )
+  })
 
-      <h2>Title: {title}</h2>
-      <h4>Author: {author}</h4>
-      <p>Description: {description}</p>
-      <img src={cover}></img>
-
-
-  </div>
-  );
+  return (<div>{bookList}</div>)
 }
 
 export default App;
