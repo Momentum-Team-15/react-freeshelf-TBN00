@@ -24,7 +24,9 @@ function App() {
             <div>{book.detailedDescription}</div>
           )}
         </div>
+        <div className='cover-container'>
         <img className="cover" src={book.coverImageUrl}></img>
+        </div>
       </section>
     )
   })
