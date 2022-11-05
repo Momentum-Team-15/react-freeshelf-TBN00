@@ -1,39 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
-import { bookInfo } from './bookinfo';
 import { useState } from 'react'
 
 
 
 
-function App() {
+const App = ({ bookInfo }) => {
+  return (
+    <section className="book-information">
+      {bookInfo.map((detail) => (
+        <div className='book-card'>
+          <div>
+            <h2>{detail.title}</h2>
+            <h3>{detail.author}</h3>
+            <p>{detail.shortDescription}</p>
+            <BookSection
+              publisher={detail.publisher}
+              pubDate={detail.publicationDate}
+              description={detail.detailedDescription}
+              url={detail.url} />
+          </div>
+          <div className='cover-container'>
+            <img className='cover' src={detail.coverImageUrl} />
+          </div>
+        </div>
+      ))}
+    </section>
+  )
+}
+
+const BookSection = ({ publisher, pubDate, description, url }) => {
   const [expanded, setExpanded] = useState(false)
   const handleClick = (event) => {
     setExpanded(!expanded)
   }
 
-  const bookList = bookInfo.map((book) => {
-    return (
-      <section id="books">
-        <div>
-          <h2>{book.title}</h2>
-          <h4>{book.author}</h4>
-          <p>{book.shortDescription}</p>
-          <button onClick={handleClick}>{expanded ? 'Less' : 'More'} information</button>
-          {expanded && (
-            <div>{book.detailedDescription}</div>
-          )}
-        </div>
-        <div className='cover-container'>
-        <img className="cover" src={book.coverImageUrl}></img>
-        </div>
-      </section>
-    )
-  })
+  return (
+    <div className='descriptions'>
+      <div className='button'>
+        <button onClick={handleClick}>
+          {expanded ? '▼ Less' : '▶ More'} Info
+        </button>
+      </div>
+      {expanded && 
+      <div>
+        <br></br>
+        URL: <a href={url}>{url}</a>
+        <p>Publisher: {publisher}</p>
+        <p>Publication Date: {pubDate}</p>
+        <p>Full description: {description}</p>
+      </div>
+        }
 
-  return <div>
-    {bookList}
-  </div>
+
+    </div>
+  )
 }
+
+
 
 export default App;
