@@ -30,28 +30,25 @@ const App = ({ bookInfo }) => {
 
 const BookSection = ({ publisher, pubDate, description, url }) => {
   const [expanded, setExpanded] = useState(false)
-  const handleClick = (event) => {
+  const handleClick = () => {
     setExpanded(!expanded)
   }
-
   return (
     <div className='descriptions'>
       <div className='button'>
-        <button onClick={handleClick}>
+        <button onClick={handleClick} aria-expanded={expanded ? 'true' : 'false'}>
           {expanded ? '▼ Less' : '▶ More'} Info
         </button>
       </div>
-      {expanded && 
-      <div>
-        <br></br>
-        URL: <a href={url}>{url}</a>
-        <p>Publisher: {publisher}</p>
-        <p>Publication Date: {pubDate}</p>
-        <p>Full description: {description}</p>
-      </div>
-        }
-
-
+      {expanded &&
+        <div>
+          <br></br>
+          URL: <a href={url}>{url}</a>
+          {publisher && (<p>Publisher: {publisher}</p>)}
+          {pubDate && (<p>Publisher: {pubDate}</p>)}
+          <p>Full description: {description}</p>
+        </div>
+      }
     </div>
   )
 }
